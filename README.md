@@ -7,13 +7,13 @@ Prerequisites
 -------------
 
 * [Livestreamer](https://github.com/chrippa/livestreamer/releases) (make sure it's in your path. The windows installer does this for you)
-* [Java 1.8 (JRE)] (http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html#javasejdk),
+* [Java 1.8 (JRE)] (http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html#javasejdk)
 * [VLC] (http://www.videolan.org/vlc/#download) or [Media Player Classic](http://mpc-hc.org/downloads/)
 
 Download Link
 -------------
 
-You can download an Exe wrapped version [ere](http://plonq.org/releases/LivestreamerJFXGUI.exe).
+You can download an Exe wrapped version [here](http://plonq.org/releases/LivestreamerJFXGUI.exe).
 
 Installation
 ------------
