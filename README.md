@@ -18,7 +18,7 @@ You can download an Exe wrapped version [here](http://plonq.org/releases/Livestr
 Installation
 ------------
 
-After you've got all the prerequisites, simply run LivestreamerJFXGUI.exe
+After you've got all the prerequisites, simply run LivestreamerJFXGUI.exe.
 
 Screenshots
 -----------
