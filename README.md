@@ -22,6 +22,13 @@ Installation
 
 After you've got all the prerequisites, simply run LivestreamerJFXGUI.exe.
 
+Features
+--------
+
+* Automatically saves channels, selected player, and selected stream (quality)
+* Can launch as many streams as you want (each stream has its own thread)
+* Choice of player
+
 Screenshots
 -----------
 
