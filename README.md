@@ -15,7 +15,7 @@ Prerequisites
 Download Link
 -------------
 
-You can download an Exe wrapped version [here](http://plonq.org/releases/LivestreamerJFXGUI.exe).
+See [releases](https://github.com/Plonq/LivestreamerJFXGUI/releases).
 
 Installation
 ------------
