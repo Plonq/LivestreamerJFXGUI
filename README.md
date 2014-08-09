@@ -3,7 +3,7 @@ LivestreamerJFXGUI
 
 JavaFX8 GUI for Livestreamer (https://github.com/chrippa/livestreamer).
 
-GUI built using JavaFX Scene Builder.
+GUI built using JavaFX Scene Builder 2.0.
 
 Prerequisites
 -------------
