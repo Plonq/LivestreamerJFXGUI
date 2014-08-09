@@ -236,6 +236,7 @@ public class LivestreamerJFXGUIApp implements Initializable {
         // Set pre-determined items
         ObservableList streams = FXCollections.observableArrayList();
         streams.addAll("low", "medium", "high", "source",
+                new Separator(), "480p", "720p", "1080p",
                 new Separator(), "worst", "best");
         streamChoiceBox.setItems(streams);
         
