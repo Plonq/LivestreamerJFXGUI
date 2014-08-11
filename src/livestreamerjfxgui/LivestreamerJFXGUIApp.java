@@ -27,7 +27,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
-import javax.swing.JOptionPane;
 import libraries.WinRegistry;
 /**
  *
