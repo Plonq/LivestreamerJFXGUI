@@ -32,7 +32,7 @@ Features
 Screenshots
 -----------
 
-![Screenshot](http://plonq.org/up/53e4dde6b412b.png)
+![Screenshot](http://plonq.org/up/53f2f1877945c.png)
 
 ![Screenshot](http://plonq.org/up/53f2f1212d6cf.png)
 
