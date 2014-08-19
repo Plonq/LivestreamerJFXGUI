@@ -6,6 +6,7 @@
 
 package livestreamerjfxgui;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +26,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import libraries.WinRegistry;
 /**
@@ -42,6 +45,8 @@ public class LivestreamerJFXGUIApp implements Initializable {
     private Label labelMessage;
     @FXML
     private ChoiceBox playerChoiceBox;
+    @FXML
+    private TextField lsPathTextField;
     
     private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
     
@@ -85,6 +90,18 @@ public class LivestreamerJFXGUIApp implements Initializable {
         launchStream(url, stream);
     }
     
+    @FXML
+    private void browseButton_OnAction(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Locate Livestreamer.exe");
+        fc.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Executables", "*.exe")
+            );
+        File file = fc.showOpenDialog(LivestreamerJFXGUI.primaryStage);
+        lsPathTextField.setText(file.getPath());
+        savePreferences();
+    }
+    
     // End FXML event methods
     
      /***
@@ -120,6 +137,12 @@ public class LivestreamerJFXGUIApp implements Initializable {
         // I think it's easier to put all this in one method, and save
         // everything whenever something changes. I believe this isn't a problem
         // with only a few preferences.
+        if (lsPathTextField.getText().isEmpty()) {
+            prefs.remove("LSPATH");
+        } else {
+            prefs.put("LSPATH", lsPathTextField.getText());
+        }
+        
         prefs.put("STREAM", streamChoiceBox.getValue().toString());
         prefs.put("PLAYER", playerChoiceBox.getValue().toString());
         
@@ -151,8 +174,13 @@ public class LivestreamerJFXGUIApp implements Initializable {
             // No saved channels, ignore
         }
         
+        lsPathTextField.setText(
+            prefs.get("LSPATH", "")
+        );
+        
         streamChoiceBox.setValue(
-            prefs.get("STREAM", streamChoiceBox.getItems().get(0).toString()) // Second value is the default, i.e., if no saved prefs, select first item
+            // We set to first in list if nothing saved
+            prefs.get("STREAM", streamChoiceBox.getItems().get(0).toString())
         );
         
         playerChoiceBox.setValue(
@@ -162,7 +190,7 @@ public class LivestreamerJFXGUIApp implements Initializable {
     
     private void launchStream(String url, String stream) {
         setMessage("Launching " + url, 0);
-        Livestreamer ls = new Livestreamer(url, stream, getPlayerPath());
+        Livestreamer ls = new Livestreamer(getLsPath(), url, stream, getPlayerPath());
         ls.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
@@ -174,6 +202,11 @@ public class LivestreamerJFXGUIApp implements Initializable {
                     setMessage("Selected stream (" + stream + ") could not be found", 1);
                 } else if (result.contains("Stream ended")) {
                     setMessage(url + " stream ended", 0);
+                } else if (result.contains("Cannot run program")
+                        && result.contains("cannot find the file specified")) {
+                    setMessage("Can't find livestreamer.exe. Check path", 1);
+                } else {
+                    setMessage(result, 1);
                 }
             }
         });
@@ -221,6 +254,14 @@ public class LivestreamerJFXGUIApp implements Initializable {
         return "VLC";
     }
     
+    private String getLsPath() {
+        if (lsPathTextField.getText().isEmpty()) {
+            return "livestreamer.exe";
+        }
+        System.out.println(lsPathTextField.getText());
+        return lsPathTextField.getText();
+    }
+    
     // End Helper methods
     
     /*
@@ -256,6 +297,19 @@ public class LivestreamerJFXGUIApp implements Initializable {
         playerChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue<? extends String> selected, String oldSelection, String newSelection) {
                 savePreferences();
+            }
+        });
+        
+        // Listen for changes to livestreamer.exe path text field
+        lsPathTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (!newPropertyValue)
+                {
+                    // Lost focus
+                    savePreferences();
+                }
             }
         });
     }
