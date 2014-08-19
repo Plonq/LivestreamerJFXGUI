@@ -1,4 +1,4 @@
-Version 1.0.1 (2014-08-08)
+Version 1.0.1 (2014-08-19)
 ------------------------
 
 - Added ability to choose path of livestreamer.exe
