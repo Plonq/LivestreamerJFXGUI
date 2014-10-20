@@ -39,5 +39,4 @@ Screenshots
 Feature Requests / Comments
 ---------------------------
 
-If you have any requests for features, you can contact me at huoni@plonq.org.
-Additionally, if you have any comments, tips, constructive criticism, etc., please let me know. I'm a beginner :).
+You can contact me at huoni [at] plonq [dot] org.
